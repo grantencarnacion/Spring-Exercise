@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Profile {
 
     // Properties
-    private @Id @GeneratedValue int id;
+    private @Id @GeneratedValue Long id;
     private String name;
     private String email;
     private String phone;
@@ -25,11 +25,11 @@ public class Profile {
         this.credit = credit;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

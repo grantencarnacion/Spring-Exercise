@@ -3,6 +3,7 @@ package com.example.SpringExercise;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Profile {
@@ -64,6 +65,32 @@ public class Profile {
         this.credit = credit;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile profile = (Profile) o;
+        return id == profile.id &&
+                credit == profile.credit &&
+                Objects.equals(name, profile.name) &&
+                Objects.equals(email, profile.email) &&
+                Objects.equals(phone, profile.phone);
+    }
 
+    @Override
+    public int hashCode() {
 
+        return Objects.hash(id, name, email, phone, credit);
+    }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", credit=" + credit +
+                '}';
+    }
 }

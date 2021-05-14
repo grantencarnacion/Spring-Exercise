@@ -21,7 +21,7 @@ public class ProfileController {
     @GetMapping("/user/{id}")
     Profile getProfile(@PathVariable Long id){
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("non existent user id" + id));
+                .orElseThrow(() -> new ProfileNotFoundException(id));
     }
 
     @PostMapping("/user")
@@ -40,7 +40,23 @@ public class ProfileController {
 
                     return repository.save(profile);
                 })
-                .orElseThrow(() -> new RuntimeException("non existent user id" + id));
+                .orElseThrow(() -> new ProfileNotFoundException(id));
     }
 
+    @PutMapping("user/{id}")
+    Profile addOrUpdateProfile(@RequestBody Profile newProfile, @PathVariable Long id){
+        return repository.findById(id)
+                .map(profile -> {
+                    profile.setName(newProfile.getName());
+                    profile.setEmail(newProfile.getEmail());
+                    profile.setPhone(newProfile.getPhone());
+                    profile.setCredit(newProfile.getCredit());
+
+                    return repository.save(profile);
+                })
+                .orElseGet(() -> {
+                    newProfile.setId(id);
+                    return repository.save(newProfile);
+                });
+    }
 }

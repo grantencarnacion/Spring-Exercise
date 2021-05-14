@@ -33,10 +33,10 @@ public class ProfileController {
     Profile updateProfile(@RequestBody Profile newProfile, @PathVariable Long id){
         return repository.findById(id)
                 .map(profile -> {
-                    profile.setName(newProfile.getName());
-                    profile.setEmail(newProfile.getEmail());
-                    profile.setPhone(newProfile.getPhone());
-                    profile.setCredit(newProfile.getCredit());
+                    profile.setName(newProfile.getName() == null ? profile.getName() : newProfile.getName());
+                    profile.setEmail(newProfile.getEmail() == null ? profile.getEmail() : newProfile.getEmail());
+                    profile.setPhone(newProfile.getPhone() == null ? profile.getPhone() : newProfile.getPhone());
+                    profile.setCredit(newProfile.getCredit() == 0 ? profile.getCredit() : newProfile.getCredit());
 
                     return repository.save(profile);
                 })
@@ -47,10 +47,10 @@ public class ProfileController {
     Profile addOrUpdateProfile(@RequestBody Profile newProfile, @PathVariable Long id){
         return repository.findById(id)
                 .map(profile -> {
-                    profile.setName(newProfile.getName());
-                    profile.setEmail(newProfile.getEmail());
-                    profile.setPhone(newProfile.getPhone());
-                    profile.setCredit(newProfile.getCredit());
+                    profile.setName(newProfile.getName() == null ? profile.getName() : newProfile.getName());
+                    profile.setEmail(newProfile.getEmail() == null ? profile.getEmail() : newProfile.getEmail());
+                    profile.setPhone(newProfile.getPhone() == null ? profile.getPhone() : newProfile.getPhone());
+                    profile.setCredit(newProfile.getCredit() == 0 ? profile.getCredit() : newProfile.getCredit());
 
                     return repository.save(profile);
                 })
